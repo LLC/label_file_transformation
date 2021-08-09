@@ -2,18 +2,17 @@ import json
 import xml.etree.ElementTree as ET
 
 
-def xml_to_json(xml_path):
+def main(input_xml_path, output_json_path):
     """
     將 labelimg 所產出的 label 檔 (.xml) 無痛轉換成 labelme 所產出的 label 檔 (.json)
 
     Args:
-        - xml_path: full path of xml label file
-            e.g., /LLC/Downloads/test.xml
-
-    Returns:
-        - json_output: label file in json type
+        - input_xml_path: full path of xml label file
+            e.g., ./examples/test_001.xml
+        - output_json_path: full path of json label file
+            e.g., ./examples/test_001.json
     """
-    tree = ET.parse(xml_path)
+    tree = ET.parse(input_xml_path)
     root = tree.getroot()
     json_output = {
         "version": "4.5.9",
@@ -42,15 +41,6 @@ def xml_to_json(xml_path):
             "flags": {}
         }
         json_output["shapes"].append(shape_dict)
-    return json_output
 
-
-def save_json_file(output_path):
-    """
-    將 json 格式的內容存成 json file (.json)
-
-    Args:
-        - output_path: 要存放 json 檔的路徑
-    """
-    with open(output_path, 'w') as f:
-        json.dump(output_path, f, indent=4)
+    with open(output_json_path, 'w') as f:
+        json.dump(json_output, f, indent=4)
