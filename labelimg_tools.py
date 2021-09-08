@@ -22,8 +22,8 @@ def labelimg_to_labelme(input_xml_path, output_json_path):
         "shapes": [],
         "imagePath": root.find('filename').text,
         "imageData": None,
-        "imageHeight": int(float(root.find('size')[0].text)),
-        "imageWidth": int(float(root.find('size')[1].text))
+        "imageHeight": int(float(root.find('size')[1].text)),
+        "imageWidth": int(float(root.find('size')[0].text))
     }
     for member in root.findall('object'):
         shape_dict = {
